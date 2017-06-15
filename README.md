@@ -1,40 +1,24 @@
-![logo](https://s3.amazonaws.com/bottega-devcamp/bottega-devcamp.png)
+# README
 
-## Hi there! Welcome to Bottega Devcamp
+This README would normally document whatever steps are necessary to get the
+application up and running.
 
-### Instructions to enter into the bash shell
+Things you may want to cover:
 
-To startup the Postgres database, the command is:
+* Ruby version
 
-```
-sudo service postgresql start
-```
+* System dependencies
 
-To generate a new rails application, the command is:
+* Configuration
 
-```
-rails new AppName -T --database=postgresql
-```
+* Database creation
 
-Change into the app:
+* Database initialization
 
-```
-cd AppName
-```
+* How to run the test suite
 
-Create and migrate the database:
+* Services (job queues, cache servers, search engines, etc.)
 
-```
-rails db:create && rails db:migrate
-```
+* Deployment instructions
 
-To run the Rails server on C9, the command is:
-
-```
-rails s -b $IP -p $PORT
-```
-
-For more information on how to use Cloud9, visit http://docs.c9.io for our documentation. If you want, you can also go watch some training videos at
-http://www.youtube.com/user/c9ide.
-
-Good luck with the coding!
+* ...
