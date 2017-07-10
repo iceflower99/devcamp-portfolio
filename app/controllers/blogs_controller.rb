@@ -1,15 +1,20 @@
 class BlogsController < ApplicationController
   before_action :set_blog, only: [:show, :edit, :update, :destroy,:toggle_status]
+  layout "blog"
+
 
   # GET /blogs
   # GET /blogs.json
   def index
     @blogs = Blog.all
+    @page_title="My Portfolio Blog "
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
+     @page_title=@blog.title
+     @seo_keywords=@blog.body
   end
 
   # GET /blogs/new
@@ -46,9 +51,9 @@ class BlogsController < ApplicationController
       end
     end
   end
-
-  # DELETE /blogs/1
-  # DELETE /blogs/1.json
+  
+  
+ 
   def destroy
     @blog.destroy
     respond_to do |format|
@@ -63,8 +68,9 @@ class BlogsController < ApplicationController
     elsif @blog.published?
       @blog.draft!
     end
-    redirect_to blogs_url notice:'post has been updated'
+redirect_to blogs_url, notice: 'Post status has been updated.'
   end
+
 
   private
     # Use callbacks to share common setup or constraints between actions.
