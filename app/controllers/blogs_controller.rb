@@ -1,23 +1,27 @@
 class BlogsController < ApplicationController
-  before_action :set_blog, only: [:show, :edit, :update, :destroy,:toggle_status]
+  before_action :set_blog, only: [:show, :edit, :update, :destroy, :toggle_status]
   layout "blog"
-  access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit,:toggle_status]}, site_admin: :all
+  access all: [:show, :index], user: {except: [:destroy, :new, :create, :update, :edit, :toggle_status]}, site_admin: :all
 
   # GET /blogs
   # GET /blogs.json
   def index
-    @blogs =Blog.page(params[:page]).per(5)
-    @page_title="My Portfolio Blog "
+    if logged_in?(:site_admin)
+      @blogs = Blog.recent.page(params[:page]).per(5)
+    else
+      @blogs = Blog.published.recent.page(params[:page]).per(5)
+    end
+    @page_title = "My Portfolio Blog"
   end
 
   # GET /blogs/1
   # GET /blogs/1.json
   def show
     @blog = Blog.includes(:comments).friendly.find(params[:id])
-     @comment = Comment.new
-    
-     @page_title=@blog.title
-     @seo_keywords=@blog.body
+    @comment = Comment.new
+
+    @page_title = @blog.title
+    @seo_keywords = @blog.body
   end
 
   # GET /blogs/new
@@ -36,7 +40,7 @@ class BlogsController < ApplicationController
 
     respond_to do |format|
       if @blog.save
-        format.html { redirect_to @blog, notice: 'Blog was successfully created.' }
+        format.html { redirect_to @blog, notice: 'Your post is now live.' }
       else
         format.html { render :new }
       end
@@ -54,9 +58,9 @@ class BlogsController < ApplicationController
       end
     end
   end
-  
-  
- 
+
+  # DELETE /blogs/1
+  # DELETE /blogs/1.json
   def destroy
     @blog.destroy
     respond_to do |format|
@@ -64,16 +68,16 @@ class BlogsController < ApplicationController
       format.json { head :no_content }
     end
   end
-  
+
   def toggle_status
     if @blog.draft?
       @blog.published!
     elsif @blog.published?
       @blog.draft!
     end
-redirect_to blogs_url, notice: 'Post status has been updated.'
+        
+    redirect_to blogs_url, notice: 'Post status has been updated.'
   end
-
 
   private
     # Use callbacks to share common setup or constraints between actions.
