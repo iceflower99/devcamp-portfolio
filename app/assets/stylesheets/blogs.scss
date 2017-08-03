@@ -13,7 +13,7 @@
 }
 
 body {
-  font-family: Georgia, "Times New Roman", Times, serif;
+  font-family: 'Lato', sans-serif;
   color: #555;
 }
 
@@ -23,7 +23,7 @@ h3, .h3,
 h4, .h4,
 h5, .h5,
 h6, .h6 {
-  font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
+  font-family: 'Roboto Slab', serif;
   font-weight: normal;
   color: #333;
 }
@@ -127,6 +127,7 @@ h6, .h6 {
   margin-bottom: 0;
 }
 
+
 /* Pagination */
 .blog-pagination {
   margin-bottom: 4rem;
@@ -134,6 +135,7 @@ h6, .h6 {
 .blog-pagination > .btn {
   border-radius: 2rem;
 }
+
 
 /*
  * Blog posts
@@ -150,6 +152,7 @@ h6, .h6 {
   margin-bottom: 1.25rem;
   color: #999;
 }
+
 
 /*
  * Footer
